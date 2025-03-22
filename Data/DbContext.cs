@@ -7,13 +7,15 @@ namespace AulaEntity.Data
 {
     public class AppDbContext : DbContext
     {
-        DbSet<Estudante> Estudantes { get; set; }
+        private readonly IConfiguration _configuration;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration)
+            : base(options)
         {
-            optionsBuilder.UseOracle(connectionString: "Data Source=localhost:1521/XE;User Id=system;Password=@Wtms12481632");
-            base.OnConfiguring(optionsBuilder);
+            _configuration = configuration;
         }
+
+        DbSet<Estudante> Estudantes { get; set; }       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

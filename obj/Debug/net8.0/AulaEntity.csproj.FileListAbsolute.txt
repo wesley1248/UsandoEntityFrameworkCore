@@ -288,3 +288,4 @@ D:\Projetos\AulaEntity\obj\Debug\net8.0\refint\AulaEntity.dll
 D:\Projetos\AulaEntity\obj\Debug\net8.0\AulaEntity.pdb
 D:\Projetos\AulaEntity\obj\Debug\net8.0\AulaEntity.genruntimeconfig.cache
 D:\Projetos\AulaEntity\obj\Debug\net8.0\ref\AulaEntity.dll
+D:\Projetos\AulaEntity\obj\Debug\net8.0\AulaEntity.sourcelink.json
