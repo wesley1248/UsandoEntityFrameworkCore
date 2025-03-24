@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projetos\\AulaEntity\\AulaEntity.csproj": {}
+    "C:\\Users\\wesle\\Source\\Repos\\UsandoEntityFrameworkCore\\AulaEntity.csproj": {}
   },
   "projects": {
-    "D:\\Projetos\\AulaEntity\\AulaEntity.csproj": {
+    "C:\\Users\\wesle\\Source\\Repos\\UsandoEntityFrameworkCore\\AulaEntity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projetos\\AulaEntity\\AulaEntity.csproj",
+        "projectUniqueName": "C:\\Users\\wesle\\Source\\Repos\\UsandoEntityFrameworkCore\\AulaEntity.csproj",
         "projectName": "AulaEntity",
-        "projectPath": "D:\\Projetos\\AulaEntity\\AulaEntity.csproj",
+        "projectPath": "C:\\Users\\wesle\\Source\\Repos\\UsandoEntityFrameworkCore\\AulaEntity.csproj",
         "packagesPath": "C:\\Users\\wesle\\.nuget\\packages\\",
-        "outputPath": "D:\\Projetos\\AulaEntity\\obj\\",
+        "outputPath": "C:\\Users\\wesle\\Source\\Repos\\UsandoEntityFrameworkCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

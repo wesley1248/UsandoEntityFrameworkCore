@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G69zX0wYphM=",
+  "dgSpecHash": "RjagV6E/4B0=",
   "success": true,
-  "projectFilePath": "D:\\Projetos\\AulaEntity\\AulaEntity.csproj",
+  "projectFilePath": "C:\\Users\\wesle\\Source\\Repos\\UsandoEntityFrameworkCore\\AulaEntity.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wesle\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\wesle\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
