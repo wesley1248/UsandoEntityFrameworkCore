@@ -11,15 +11,13 @@
                 <i class="fas fa-search"></i>&nbsp;Consultar
             </button>
         </div>
+        @* teste *@
     </div>
 </div>
-
-@* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
 
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function() {
-            debugger
             $("#btnBuscarEstudantes").click(function() {
                 $.ajax({
                     url: '/Estudante/Index',
