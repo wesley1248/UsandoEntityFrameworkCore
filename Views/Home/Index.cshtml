@@ -6,15 +6,43 @@
     <h1 class="display-4">Bem Vindo</h1>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
-                <label for="btnBuscarEstudantes">Consultar Estudantes</label>
-                <button id="btnBuscarEstudantes" type="button" class="btn btn-primary">
-                    <i class="fas fa-search"></i>&nbsp;Consultar
-                </button>
-            </div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
+            <label for="btnBuscarEstudantes">Consultar Estudantes</label>
+            <button id="btnBuscarEstudantes" type="button" class="btn btn-primary">
+                <i class="fas fa-search"></i>&nbsp;Consultar
+            </button>
         </div>
     </div>
 </div>
+
+@* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            debugger
+            $("#btnBuscarEstudantes").click(function() {
+                $.ajax({
+                    url: '/Estudante/Index',
+                    type: 'GET',
+                    dataType: 'html',
+                    cache: false,
+                    success: function(response) {
+                        debugger
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Erro ao buscar estudantes:", error);
+                        let mensagemErro = "Ocorreu um erro ao buscar os estudantes.";
+
+                        if (xhr.status === 404) {
+                            mensagemErro = "Página não encontrada. Verifique se a controller existe.";
+                        } else if (xhr.status === 500) {
+                            mensagemErro = "Erro interno do servidor.";
+                        }
+
+                        $("#mensagemErro").text(mensagemErro).show();
+                    }
+                });
+            });
+        });
+    </script>
+}
