@@ -12,22 +12,20 @@
             </button>
         </div>
     </div>
+    <div id="mensagemErro" style="display:none;" class="alert alert-danger mt-3"></div>
 </div>
-
-@* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
 
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function() {
-            debugger
-            $("#btnBuscarEstudantes").click(function() {
+            $("#btnBuscarEstudantes").click(function() {               
                 $.ajax({
                     url: '/Estudante/Index',
                     type: 'GET',
                     dataType: 'html',
                     cache: false,
                     success: function(response) {
-                        debugger
+                        console.log("Requisição completada com sucesso");
                     },
                     error: function(xhr, status, error) {
                         console.error("Erro ao buscar estudantes:", error);
