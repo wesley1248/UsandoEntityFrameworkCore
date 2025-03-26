@@ -18,21 +18,28 @@
             </button>
         </div>
     </div>
+    <div id="mensagem-sistema" class="alert d-none" role="alert" style="margin-top: 10px;">
+        <span id="texto-mensagem"></span>
+        <button type="button" class="close" onclick="$('#mensagem-sistema').addClass('d-none')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 </div>
 
 @section Scripts {
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#btnBuscarEstudantes").click(function() {
+
+        $(document).ready(function () {
+            $("#btnBuscarEstudantes").click(function () {
                 $.ajax({
                     url: '/Estudante/Index',
                     type: 'GET',
                     dataType: 'html',
                     cache: false,
-                    success: function(response) {
-                        debugger
+                    success: function (response) {
+
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.error("Erro ao buscar estudantes:", error);
                         let mensagemErro = "Ocorreu um erro ao buscar os estudantes.";
 
@@ -47,16 +54,22 @@
                 });
             });
 
-            $("#btnNewEstudante").click(function() {
+            $("#btnNewEstudante").click(function () {
                 $.ajax({
                     url: '/Estudante/NewEstudante',
                     type: 'GET',
                     dataType: 'json',
                     cache: false,
-                    success: function(response) {
-                        debugger
+                    success: function (response) {
+
+                        if (response.status > 0) {
+                            SucessoAcao();
+                            return;
+                        }
+
+                        ErroAcao();
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         console.error("Erro ao buscar estudantes:", error);
                         let mensagemErro = "Ocorreu um erro ao buscar os estudantes.";
 
@@ -71,5 +84,35 @@
                 });
             });
         });
+
+        function ErroAcao(mensagem) {
+
+            $("#mensagem-sistema").removeClass("alert-success alert-danger alert-warning alert-info");
+            $("#mensagem-sistema").addClass("alert-danger");
+            $("#texto-mensagem").text('Erro ao executar a Açao ' + mensagem);
+            $("#mensagem-sistema").removeClass("d-none").fadeIn();
+
+
+            setTimeout(function () {
+                $("#mensagem-sistema").fadeOut(function () {
+                    $(this).addClass("d-none");
+                });
+            }, 5000);
+        }
+
+        function SucessoAcao() {
+
+            $("#mensagem-sistema").removeClass("alert-success alert-danger alert-warning alert-info");
+            $("#mensagem-sistema").addClass("alert-success");
+            $("#texto-mensagem").text('Sucesso');
+            $("#mensagem-sistema").removeClass("d-none").fadeIn();
+
+            /*setTimeout(function () {
+                $("#mensagem-sistema").fadeOut(function () {
+                    $(this).addClass("d-none");
+                });
+            }, 5000);*/
+
+        }
     </script>
 }

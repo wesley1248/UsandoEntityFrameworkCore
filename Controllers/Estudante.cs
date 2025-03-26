@@ -27,13 +27,19 @@ namespace AulaEntity.Controllers
 
         public async Task<JsonResult> NewEstudante()
         {
-            var estudante = new Models.Estudante();
+            try
+            {
+                var estudante = new Models.Estudante();
+                _context.Estudantes.Add(estudante);
+                var linhasAfetadas = await _context.SaveChangesAsync();
 
-            _context.Estudantes.Add(estudante);
-
-            int linhasAfetadas = await _context.SaveChangesAsync();
-
-            return Json(new { status = "success", message = "Operação realizada com sucesso" });
+                return Json(new { status = linhasAfetadas });
+            }
+            catch (Exception ex)
+            {
+                string mensagemErro = ex.InnerException?.Message ?? ex.Message;
+                return Json(new { status = 0, message = mensagemErro });
+            }
         }
     }
 }
