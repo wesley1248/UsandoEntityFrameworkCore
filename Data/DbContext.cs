@@ -15,7 +15,7 @@ namespace AulaEntity.Data
             _configuration = configuration;
         }
 
-        DbSet<Estudante> Estudantes { get; set; }       
+        public DbSet<Estudante> Estudantes { get; set; }       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
