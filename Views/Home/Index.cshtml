@@ -2,20 +2,52 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bem Vindo</h1>
+<style>
+    button {
+        margin: 5px !important;
+    }
+</style>
+
+<div class="">
+    <h1 class="display-4" style="text-align: center;">Bem Vindo</h1>
+
     <div class="row">
-        <div class="col-md-3">
-            <label for="btnBuscarEstudantes">Consultar Estudantes</label>
-            <button id="btnBuscarEstudantes" type="button" class="btn btn-primary">
-                <i class="fas fa-search"></i>&nbsp;Consultar
-            </button>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button id="btnBuscarEstudantes" type="button" class="btn btn-primary btn-block">
+                                <i class="fas fa-search"></i>&nbsp;Consultar
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button id="btnNewEstudante" type="button" class="btn btn-success btn-block">
+                                <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Novo Estudante
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button id="btnEditarEstudante" type="button" class="btn btn-warning btn-block">
+                                <i class="fas fa-edit"></i>&nbsp;Atualizar Estudante
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button id="btnExcluirEstudante" type="button" class="btn btn-danger btn-block">
+                                <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Excluir Estudante
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3">
-            <label for="btnNewEstudante">Novo Estudante</label>
-            <button id="btnNewEstudante" type="button" class="btn btn-secondary">
-                <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Novo Estudante
-            </button>
+        <div class="col-md-6">
+            <!--LOCAL DO PAINEL -->
         </div>
     </div>
     <div id="mensagem-sistema" class="alert d-none" role="alert" style="margin-top: 10px;">
@@ -30,6 +62,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+
             $("#btnBuscarEstudantes").click(function () {
                 $.ajax({
                     url: '/Estudante/Index',
@@ -62,12 +95,72 @@
                     cache: false,
                     success: function (response) {
 
-                        if (response.status > 0) {
+                        if (response.status !== 3) {
                             SucessoAcao();
                             return;
                         }
 
-                        ErroAcao();
+                        ErroAcao(response.message);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Erro ao buscar estudantes:", error);
+                        let mensagemErro = "Ocorreu um erro ao buscar os estudantes.";
+
+                        if (xhr.status === 404) {
+                            mensagemErro = "Página não encontrada. Verifique se a controller existe.";
+                        } else if (xhr.status === 500) {
+                            mensagemErro = "Erro interno do servidor.";
+                        }
+
+                        $("#mensagemErro").text(mensagemErro).show();
+                    }
+                });
+            });
+
+            $("#btnEditarEstudante").click(function () {
+                $.ajax({
+                    url: '/Estudante/EditarEstudante',
+                    type: 'GET',
+                    dataType: 'json',
+                    cache: false,
+                    success: function (response) {
+
+                        if (response.status !== 3) {
+                            SucessoAcao();
+                            return;
+                        }
+
+                        ErroAcao(response.message);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Erro ao buscar estudantes:", error);
+                        let mensagemErro = "Ocorreu um erro ao buscar os estudantes.";
+
+                        if (xhr.status === 404) {
+                            mensagemErro = "Página não encontrada. Verifique se a controller existe.";
+                        } else if (xhr.status === 500) {
+                            mensagemErro = "Erro interno do servidor.";
+                        }
+
+                        $("#mensagemErro").text(mensagemErro).show();
+                    }
+                });
+            });
+
+            $("#btnExcluirEstudante").click(function () {
+                $.ajax({
+                    url: '/Estudante/ExcluirEstudante',
+                    type: 'GET',
+                    dataType: 'json',
+                    cache: false,
+                    success: function (response) {
+
+                        if (response.status !== 3) {
+                            SucessoAcao();
+                            return;
+                        }
+
+                        ErroAcao(response.message);
                     },
                     error: function (xhr, status, error) {
                         console.error("Erro ao buscar estudantes:", error);
@@ -107,11 +200,11 @@
             $("#texto-mensagem").text('Sucesso');
             $("#mensagem-sistema").removeClass("d-none").fadeIn();
 
-            /*setTimeout(function () {
+            setTimeout(function () {
                 $("#mensagem-sistema").fadeOut(function () {
                     $(this).addClass("d-none");
                 });
-            }, 5000);*/
+            }, 5000);
 
         }
     </script>
