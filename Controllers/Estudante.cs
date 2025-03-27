@@ -22,6 +22,12 @@ namespace AulaEntity.Controllers
         public async Task<IActionResult> Index()
         {
             var estudantes = await _context.Estudantes.ToListAsync();
+
+            if (estudantes.Count == 0)
+            {
+                return new EmptyResult(); 
+            }
+
             return View(estudantes);
         }
 

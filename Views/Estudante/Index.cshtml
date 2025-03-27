@@ -1,1 +1,26 @@
 ﻿@model List<AulaEntity.Models.Estudante>
+
+
+<div class="card lista-registros">
+  <div class="card-header bg-primary text-white">
+    <h5 class="mb-0">Lista de Registros</h5>
+  </div>
+  <ul class="list-unstyled mb-0">
+    @foreach (var item in Model)
+    {
+      <li class="lista-item">
+        <div class="lista-item-info">
+          <div>
+            <p class="mb-0"><strong>@item.Nome</strong></p>
+            <small class="text-muted">ID: @item.Id</small>
+          </div>
+          <span
+            class="badge @(item.Ativo == true ? "badge-ativo" : item.Ativo == false ? "badge-inativo" : "badge-pendente")">@item.Ativo</span>
+        </div>
+      </li>
+    }
+  </ul>
+  <div class="lista-rodape">
+    Lista de registros com status visual
+  </div>
+</div>

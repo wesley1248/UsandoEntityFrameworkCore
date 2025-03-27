@@ -6,6 +6,47 @@
     button {
         margin: 5px !important;
     }
+
+    .badge-ativo {
+        background-color: #28a745;
+    }
+
+    .badge-inativo {
+        background-color: #dc3545;
+    }
+
+    .badge-pendente {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .lista-registros {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .lista-item {
+        padding: 10px 15px;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .lista-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .lista-item-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .lista-rodape {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        color: #6c757d;
+    }
 </style>
 
 <div class="">
@@ -47,7 +88,18 @@
             </div>
         </div>
         <div class="col-md-6">
-            <!--LOCAL DO PAINEL -->
+            <body>
+                <div class="container-fluid">
+                    <div id="painel" class="card lista-registros">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Lista de Registros</h5>
+                        </div>
+                        <div class="lista-rodape">
+                            Execute a Consulta
+                        </div>
+                    </div>
+                </div>
+            </body>
         </div>
     </div>
     <div id="mensagem-sistema" class="alert d-none" role="alert" style="margin-top: 10px;">
@@ -71,6 +123,12 @@
                     cache: false,
                     success: function (response) {
 
+                        if (response !== '') {
+                            $("#painel").html(response);
+                            return;
+                        }
+
+                        NaoHaRegistro();
                     },
                     error: function (xhr, status, error) {
                         console.error("Erro ao buscar estudantes:", error);
@@ -177,6 +235,22 @@
                 });
             });
         });
+
+        function NaoHaRegistro() {
+            $("#mensagem-sistema")
+                .removeClass("alert-success alert-info alert-warning")
+                .addClass("alert-info")
+                .removeClass("d-none")
+                .fadeIn();
+
+            $("#texto-mensagem").text('Não há estudantes!');
+
+            setTimeout(function () {
+                $("#mensagem-sistema").fadeOut(function () {
+                    $(this).addClass("d-none");
+                });
+            }, 5000);
+        }
 
         function ErroAcao(mensagem) {
 
